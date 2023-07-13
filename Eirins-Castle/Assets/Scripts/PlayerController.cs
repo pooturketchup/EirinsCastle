@@ -98,7 +98,7 @@ public class PlayerController : MonoBehaviour
 
             if (Input.GetKey(KeyCode.LeftControl))
             {
-                dodge(horizontalInput, verticalInput);
+                dodge();
             }
         }
         else
@@ -107,7 +107,7 @@ public class PlayerController : MonoBehaviour
 
             if (Input.GetKey(KeyCode.LeftControl))
             {
-                dodge(horizontalInput, verticalInput);
+                dodge();
             }
         }
 
@@ -127,22 +127,22 @@ public class PlayerController : MonoBehaviour
     }
 
     //player dodging
-    private void leftDodge(float horizontalInput, float verticalInput)
+    private void leftDodge()
     {
         StartCoroutine(PerformDodge(11));
     }
 
-    private void rightDodge(float horizontalInput, float verticalInput)
+    private void rightDodge()
     {
         StartCoroutine(PerformDodge(10));
     }
 
-    private void upwardDodge(float horizontalInput, float verticalInput)
+    private void upwardDodge()
     {
         StartCoroutine(PerformDodge(12));
     }
 
-    private void downwardDodge(float horizontalInput, float verticalInput)
+    private void downwardDodge()
     {
         StartCoroutine(PerformDodge(13));
     }
@@ -152,25 +152,25 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(PerformDodge(9));
     }
 
-    private void dodge(float horizontalInput, float verticalInput)
+    private void dodge()
     {
         if(!isDodging)
         {
             if (Input.GetKey(KeyCode.W))
             {
-                upwardDodge(horizontalInput, verticalInput);
+                upwardDodge();
             }
             else if (Input.GetKey(KeyCode.S))
             {
-                downwardDodge(horizontalInput, verticalInput);
+                downwardDodge();
             }
             else if (Input.GetKey(KeyCode.D))
             {
-                rightDodge(horizontalInput, verticalInput);
+                rightDodge();
             }
             else if (Input.GetKey(KeyCode.A))
             {
-                leftDodge(horizontalInput, verticalInput);
+                leftDodge();
             }
             else
             {
@@ -179,7 +179,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private System.Collections.IEnumerator PerformDodge(int num)
+    private IEnumerator PerformDodge(int num)
     {
         isDodging = true;
 
