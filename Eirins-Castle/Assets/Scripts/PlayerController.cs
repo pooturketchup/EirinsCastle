@@ -25,14 +25,14 @@ public class PlayerController : MonoBehaviour
     //dodging down sprites = array 14
     //death right sprites = array 15
     //death left sprites = array 16
-    
+
     public Sprite[][] spriteArray;
     private SpriteRenderer spriteRenderer;
     
     public float stamina = 25f;
     private bool hasStamina = true;
    
-    public List<Heart> hearts = new List<Heart>();
+    public Heart[] hearts = new Heart[10];
     private int initialHeartCount = 3;
     private bool isAlive = true;
 
@@ -41,11 +41,17 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //set inital heart count
-        while(initialHeartCount > 0)
+        //set inital heart count and fill array with non-null values
+        for(int i = 0; i < hearts.Length; i++)
         {
-            hearts.Add(new Heart());
-            initialHeartCount--;
+            if(i < initialHeartCount)
+            {
+                hearts[i].setNormStatus(1);
+            }
+            else
+            {
+                hearts[i].gameObject.SetActive(false);
+            }
         }
 
         rb = GetComponent<Rigidbody2D>();
@@ -53,7 +59,7 @@ public class PlayerController : MonoBehaviour
     }
 
     //checks to see if player has any hearts left
-    private bool lifeStatus(List<Heart> currH)
+    private bool lifeStatus(Heart[] currH)
     {
        return isAlive = currH[0].getNormStatus() <= 0 ? isAlive = false : isAlive = true;
     }
@@ -120,6 +126,7 @@ public class PlayerController : MonoBehaviour
         rb.velocity = movement;
     }
 
+    //player dodging
     private void leftDodge(float horizontalInput, float verticalInput)
     {
         StartCoroutine(PerformDodge(11));
@@ -194,9 +201,30 @@ public class PlayerController : MonoBehaviour
         isDodging = false;
     }
 
+    public string heartsLeft()
+    {
+        float currHealth = 0;
+
+        for(int i = 0; i < initialHeartCount; i++)
+        {
+            if(hearts[i].getNormStatus() == 1)
+            {
+                currHealth++;
+            }
+            else if(hearts[i].getNormStatus() == 0.5f)
+            {
+                currHealth += 0.5f;
+            }
+        }
+
+        return currHealth.ToString();
+    }
+
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("Player has " + heartsLeft() + " hearts remaining!!!");
+
         if (lifeStatus(hearts))
         {
             playerMovement();
