@@ -26,4 +26,9 @@ public class SlimeController : BaseEnemy
     {
         
     }
+
+    public override void Die()
+    {
+
+    }
 }

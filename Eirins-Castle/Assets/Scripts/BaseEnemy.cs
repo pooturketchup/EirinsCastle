@@ -3,9 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class BaseEnemy : MonoBehaviour
+public interface IEnemy
+{
+    void Die();
+}
+
+public class BaseEnemy : MonoBehaviour, IEnemy
 {
     protected static PlayerController playerController;
+    public EnemyHealthBar healthBar;
    
     // Start is called before the first frame update
     void Start()
@@ -40,7 +46,8 @@ public class BaseEnemy : MonoBehaviour
         
     }
 
-  
-
-  
+    public virtual void Die()
+    {
+        throw new System.NotImplementedException();
+    }
 }

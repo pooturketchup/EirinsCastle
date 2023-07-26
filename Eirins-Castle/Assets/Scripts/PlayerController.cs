@@ -36,6 +36,9 @@ public class PlayerController : MonoBehaviour
     private int initialHeartCount = 3;
     private bool isAlive = true;
 
+    //current equipped spell/tool/utility
+    public GameObject toolAnchor;
+
     private Rigidbody2D rb;
 
     // Start is called before the first frame update
@@ -220,6 +223,20 @@ public class PlayerController : MonoBehaviour
         return currHealth.ToString();
     }
 
+    public void Attack()
+    {
+        BaseMagicSpell spell;
+
+        if(Input.GetKeyDown(KeyCode.Mouse0))
+        {
+          if(toolAnchor.gameObject.GetComponentInChildren<BaseMagicSpell>() is BaseMagicSpell)
+          {
+                spell = toolAnchor.gameObject.GetComponentInChildren<BaseMagicSpell>();
+                spell.isLive = true;
+          }
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -228,6 +245,7 @@ public class PlayerController : MonoBehaviour
         if (lifeStatus(hearts))
         {
             playerMovement();
+            Attack();
 
         }
         else

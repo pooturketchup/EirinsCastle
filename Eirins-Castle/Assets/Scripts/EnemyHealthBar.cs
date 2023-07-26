@@ -7,7 +7,10 @@ public class EnemyHealthBar : MonoBehaviour
     private float normStatus = 1f;
     private static float maxHits = 2f;
     private float currHits = maxHits;
-    private static float maxBarLenght = 0.3f;
+    private static float maxBarLenght = 1f;
+    public bool isDamaged = false;
+    public bool isHealed = false;
+    public bool isDead = false;
     
     public EnemyHealthBar() { }
 
@@ -56,19 +59,33 @@ public class EnemyHealthBar : MonoBehaviour
     }
 
     //adjust the length of the health bar
-    public void setHealthBar()
+    public void setHealthBar(float num)
     {
-        //if enemy takes damage
-        if(normStatus > 0)
+        //if health goes below 0 set to die
+        if(normStatus <= 0)
         {
-            this.GetComponent<Transform>().localScale = new Vector3((lossHealth(0.0001f) * maxBarLenght), this.transform.localScale.y, 1.0f);
+            normStatus=0;
+            this.GetComponent<Transform>().localScale = new Vector3(0, this.transform.localScale.y, 1.0f);
+            isDead = true;
+        }
+
+        //if enemy takes damage
+        if(normStatus > 0 && isDamaged == true)
+        {
+            this.GetComponent<Transform>().localScale = new Vector3((lossHealth(num) * maxBarLenght), this.transform.localScale.y, 1.0f);
         }
 
         //if enemy gains health
-        //if(normStatus < 0)
-        //{
-        //    this.GetComponent<Transform>().localScale = new Vector3((gainHealth(1f) * maxBarLenght), this.transform.localScale.y, 1.0f);
-        //}
+        if (normStatus <= 1 && isHealed == true)
+        {
+            this.GetComponent<Transform>().localScale = new Vector3((gainHealth(num) * maxBarLenght), this.transform.localScale.y, 1.0f);
+        }
+
+        //make sure health does not exceed 100%
+        if(normStatus > 1)
+        {
+            normStatus = 1;
+        }
     }
 
     // Start is called before the first frame update
@@ -80,6 +97,6 @@ public class EnemyHealthBar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        setHealthBar();
+        //setHealthBar(0.002f);
     }
 }
