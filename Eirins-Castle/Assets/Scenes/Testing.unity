@@ -620,8 +620,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 152033806}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.01999998, y: 0.097, z: 0}
-  m_LocalScale: {x: 0.003, y: 0.003, z: 1}
+  m_LocalPosition: {x: 0.01999998, y: 10, z: 0}
+  m_LocalScale: {x: 0.18, y: 0.15, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1197474413}
@@ -1309,6 +1309,7 @@ GameObject:
   - component: {fileID: 1027967069}
   - component: {fileID: 1027967072}
   - component: {fileID: 1027967073}
+  - component: {fileID: 1027967074}
   m_Layer: 3
   m_Name: Slime
   m_TagString: Enemy
@@ -1325,7 +1326,7 @@ Transform:
   m_GameObject: {fileID: 1027967067}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.02, y: 0.02, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 152033809}
@@ -1391,9 +1392,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.08}
+  m_Offset: {x: 0, y: -1}
   serializedVersion: 2
-  m_Radius: 0.12
+  m_Radius: 7
 --- !u!212 &1027967071
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1435,7 +1436,7 @@ SpriteRenderer:
   m_SortingLayerID: 1685241939
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 15dc4eb01dbeea343b3b8dfcdeb10bb6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f23dc0436f4f02145996d60cfb39298c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1478,9 +1479,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.08}
+  m_Offset: {x: 0, y: -1}
   serializedVersion: 2
-  m_Radius: 0.17
+  m_Radius: 8.5
 --- !u!114 &1027967073
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1494,6 +1495,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBar: {fileID: 1197474414}
+--- !u!114 &1027967074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1027967067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c9db03f6e01c7b4aaf9ba7286f532a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 1027967073}
+  idleSprites:
+  - {fileID: 21300000, guid: f23dc0436f4f02145996d60cfb39298c, type: 3}
+  - {fileID: 21300000, guid: 2904d7d303101b348a2c6cff11b5e889, type: 3}
+  jumpSprites:
+  - {fileID: 21300000, guid: 2904d7d303101b348a2c6cff11b5e889, type: 3}
+  - {fileID: 21300000, guid: 2c65998429d1f2c479033809b18bf7dc, type: 3}
+  - {fileID: 21300000, guid: d7921af6a065cdb4587c568b74bd40c1, type: 3}
+  - {fileID: 21300000, guid: 2c65998429d1f2c479033809b18bf7dc, type: 3}
+  - {fileID: 21300000, guid: 2904d7d303101b348a2c6cff11b5e889, type: 3}
+  attackSprites:
+  - {fileID: 21300000, guid: d0f029c1898d0dc42b0623389c8c9d42, type: 3}
+  - {fileID: 21300000, guid: 1d6747f742e206e42887185210f24d84, type: 3}
+  - {fileID: 21300000, guid: 1ec9ccf363156eb459ff9560693f9318, type: 3}
+  moveRightSprites: []
+  moveLeftSprites: []
+  hurtSprites: []
+  deathSprites: []
+  animationSpeed: 0.3
 --- !u!1 &1092242105
 GameObject:
   m_ObjectHideFlags: 0

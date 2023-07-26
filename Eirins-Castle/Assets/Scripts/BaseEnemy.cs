@@ -1,18 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 
-public interface IEnemy
-{
-    void Die();
-}
+//public interface IEnemy
+//{
+//    void Die();
+//}
 
-public class BaseEnemy : MonoBehaviour, IEnemy
+public class BaseEnemy : MonoBehaviour//, IEnemy
 {
     protected static PlayerController playerController;
     public EnemyHealthBar healthBar;
-   
+
+    [NonSerialized]
+    public bool isMovingRight = false;
+    [NonSerialized]
+    public bool isMovingLeft = false;
+    [NonSerialized]
+    public bool isJumping = false;
+    [NonSerialized]
+    public bool isAttacking = false;
+    [NonSerialized]
+    public bool isDying = false;
+    [NonSerialized]
+    public bool isHurt = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,6 +53,7 @@ public class BaseEnemy : MonoBehaviour, IEnemy
         }
 
     }
+
 
     // Update is called once per frame
     void Update()
